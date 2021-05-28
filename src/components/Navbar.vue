@@ -1,4 +1,6 @@
-<template>
+<template >
+
+
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -12,8 +14,17 @@
               <router-link to="/" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Home'}">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name: 'Subjects'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Subjects'}">Subjects</router-link>
+              <router-link :to="{name: 'News'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'News'}">News</router-link>
             </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">TopNews</router-link>
+            </li>
+            <b-dropdown text="Category" variant="primary" class="e-auto mb-2 mb-lg-0" style="height: 35px; margin-top: 5px">
+              <b-dropdown-item href="#"  v-for="category in kategorija" :key="category.name" @click="selectedCategory = kategorija">{{category.name}}</b-dropdown-item>
+            </b-dropdown>
+<!--            <li class="nav-item">-->
+<!--              <router-link :to="{name: 'Category'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Category'}">Category</router-link>-->
+<!--            </li>-->
           </ul>
           <form v-if="canLogout" class="d-flex" @submit.prevent="logout">
             <button class="btn btn-outline-secondary" type="submit">Logout</button>
@@ -31,6 +42,19 @@ export default {
     canLogout() {
       return this.$route.name !== 'Login';
     }
+  },
+  data() {
+    return {
+      selectedCategory: null,
+      kategorija: []
+    }
+  },
+  mounted() {
+    this.$axios.get('/api/category').then((response) => {
+      console.log("Neka glupost kategorija")
+      this.kategorija = response.data;
+      console.log(response)
+    });
   },
   methods: {
     logout() {

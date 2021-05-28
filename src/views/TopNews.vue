@@ -1,42 +1,46 @@
 <template>
   <div class="news" style="text-align: center">
-    <h1 class="mt-4">News</h1>
+    <h1 class="mt-4">TopNews</h1>
 
     <div class="row" style="display:inline;">
       <div class="col-4 mx-auto" >
-        <table class=" table text-center" style="width: 650px;margin-left: -150px;">
+        <table class=" table text-center" style="width: 800px;margin-left: -250px;">
           <thead>
           <tr>
-<!--            <th scope="col">ID</th>-->
             <th scope="col">Title</th>
+            <th scope="col">Visits</th>
             <th scope="col">Created At</th>
             <th scope="col">Content</th>
           </tr>
           </thead>
-          <tbody >
+          <tbody>
           <tr v-for="news in vest" :key="news.id" @click="find(news.id)">
 
-
-            <td scope="row"> {{ news.title }}</td>
-            <td>{{new Date(news.createdAt).toISOString().split('T')[0] }}</td>
+            <td scope="row">{{ news.title }}</td>
+            <td>{{ news.visits }}</td>
+            <td>{{ new Date(news.createdAt).toISOString().split('T')[0]  }}</td>
             <td>{{ news.content | shortText }}</td>
-          </tr>
 
+          </tr>
           </tbody>
         </table>
       </div>
-      <div class="col-6" >
-        <NewsCom v-if="selectedNews" :news="selectedNews"></NewsCom>
+      <div class="col-6">
+        <TopNews v-if="selectedNews" :news="selectedNews"></TopNews>
       </div>
     </div>
   </div>
+
+
 </template>
 
+
 <script>
-import NewsCom from "../components/NewsCom";
+import TopNews from "../components/TopNews";
 
 export default {
-  components: {NewsCom},
+
+  components: {TopNews},
   filters: {
     shortText(value) {
       if (value.length < 30) {
@@ -53,18 +57,13 @@ export default {
   },
   methods: {
     find(id) {
-        this.$router.push(`/news/${id}`);
+      this.$router.push(`/news/${id}`);
 
     }
   },
-  // methods: {
-  //   navigateTo(route) {
-  //     this.$router.push(route)
-  //   }
-  // },
   mounted() {
-    this.$axios.get('/api/news').then((response) => {
-      console.log("Neka glupost")
+    this.$axios.get('/api/news/visits').then((response) => {
+      console.log("Neka glupost Visit")
       this.vest = response.data;
       console.log(response)
     });

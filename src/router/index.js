@@ -14,7 +14,7 @@ const routes = [
     path: '/news',
     name: 'News',
     meta: {
-      authRequired: true,
+      authRequired: false,
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -22,10 +22,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/News.vue')
   },
   {
-    path: '/news/:id',
-    name: 'single-news',
+    path: '/news/visits',
+    name: 'TopNews',
     meta: {
-      authRequired: true,
+      authRequired: false,
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/TopNews.vue')
+  },
+  {
+    path: '/news/:id',
+    name: 'SingleNews',
+    meta: {
+      authRequired: false,
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -33,7 +44,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/SingleNews.vue')
   },
   {
-    path: '/login',
+    path: '/category',
+    name: 'Category',
+    meta: {
+      authRequired: false,
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Category.vue')
+  },
+  {
+    path: 'users/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   }

@@ -1,23 +1,23 @@
 <template>
   <div>
-    <subject :news="news"></subject>
+    <NewsCom :news="vest"></NewsCom>
   </div>
 </template>
 
 <script>
-import News from "../components/News";
+import NewsCom from "../components/NewsCom";
 export default {
   name: "SingleNews",
-  // eslint-disable-next-line vue/no-unused-components
-  components: {News},
+
+  components: {NewsCom},
   data() {
     return {
-      news: {},
+      vest: {},
     }
   },
   created() {
     this.$axios.get(`/api/news/${this.$route.params.id}`).then((response) => {
-      this.news = response.data;
+      this.vest = response.data;
     });
   }
 }

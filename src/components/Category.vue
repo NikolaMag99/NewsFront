@@ -1,12 +1,12 @@
 <template>
   <div>
     <h2>
-      Predmet: {{ news.title }}
+      Ime: {{ category.name }}
     </h2>
 
     <h5>Opis:</h5>
     <p>
-      {{ news.content }} <br><br>
+      {{ category.description }} <br><br>
     </p>
   </div>
 </template>
@@ -14,9 +14,9 @@
 <script>
 
 export default {
-  name: "News",
+  name: "Category",
   props: {
-    news: {
+    category: {
       type: Object,
       required: true,
     }
