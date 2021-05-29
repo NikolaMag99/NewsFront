@@ -8,7 +8,7 @@
 
           <thead>
           <tr>
-<!--            <th scope="col">ID</th>-->
+            <!--            <th scope="col">ID</th>-->
             <th scope="col">Title</th>
             <th scope="col">Created At</th>
             <th scope="col">Content</th>
@@ -20,7 +20,7 @@
           <tr v-for="news in vest" :key="news.id" @click="find(news.id)">
 
             <b-card style="margin-top: 10px">
-            <td scope="row"> {{ news.title }}</td>
+              <td scope="row"> {{ news.title }}</td>
             </b-card>
 
             <td>{{new Date(news.createdAt).toISOString().split('T')[0] }}</td>
@@ -38,43 +38,43 @@
     </div>
   </div>
 </template>
-
 <script>
 import NewsCom from "../components/NewsCom";
-
 export default {
+  name: "NewsByCategory",
+
   components: {NewsCom},
-  filters: {
-    shortText(value) {
-      if (value.length < 30) {
-        return value;
-      }
-      return value.slice(0, 30) + '...'
-    }
-  },
   data() {
     return {
       selectedNews: null,
-      vest: []
+      vest: [],
+      componentKey: 0,
+
     }
   },
   methods: {
     find(id) {
-        this.$router.push(`/news/${id}`);
+      this.$router.push(`/news/${id}`);
 
+    },
+    forceRerender() {
+      this.componentKey += 1;
     }
   },
-  // methods: {
-  //   navigateTo(route) {
-  //     this.$router.push(route)
-  //   }
-  // },
   mounted() {
-    this.$axios.get('/api/news').then((response) => {
-      console.log("Neka glupost")
+    this.$axios.get(`/api/news/kategorija/${this.$route.params.name}`).then((response) => {
       this.vest = response.data;
-      console.log(response)
     });
-  }
+  },
+  // mounted() {
+  //   this.$axios.get(`/api/news/kategorija/${this.$route.params.kategorija}`).then((response) => {
+  //     this.vest = response.data;
+  //     console.log(response)
+  //   });
+  // }
 }
 </script>
+
+<style scoped>
+
+</style>

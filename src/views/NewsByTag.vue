@@ -70,10 +70,8 @@ export default {
   //   }
   // },
   mounted() {
-    this.$axios.get('/api/news').then((response) => {
-      console.log("Neka glupost")
+    this.$axios.get(`/api/news/tag/${this.$route.params.id}`).then((response) => {
       this.vest = response.data;
-      console.log(response)
     });
   }
 }

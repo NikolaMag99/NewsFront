@@ -10,18 +10,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--            <li class="nav-item">-->
+<!--              <router-link to="/" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Home'}">Pocetna</router-link>-->
+<!--            </li>-->
             <li class="nav-item">
-              <router-link to="/" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Home'}">Home</router-link>
+              <router-link :to="{name: 'News'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'News'}">Vesti</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name: 'News'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'News'}">News</router-link>
+              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Najcitanije</router-link>
             </li>
-            <li class="nav-item">
-              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">TopNews</router-link>
-            </li>
-            <b-dropdown text="Category" variant="primary" class="e-auto mb-2 mb-lg-0" style="height: 35px; margin-top: 5px">
-              <b-dropdown-item href="#"  v-for="category in kategorija" :key="category.name" @click="selectedCategory = kategorija">{{category.name}}</b-dropdown-item>
+            <b-dropdown text="Kategorije"   variant="primary" class="e-auto mb-2 mb-lg-0" style="height: 35px; margin-top: 5px">
+              <b-dropdown-item href="#"  v-for="category in kategorija" :key="category.name"  @click="find(category.name)">{{category.name}}</b-dropdown-item>
             </b-dropdown>
+            <li v-if="canLogout" class="nav-item">
+              <router-link :to="{name: 'AddNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddNews'}">Dodaj vest</router-link>
+            </li>
+            <li  v-if="canLogout" class="nav-item">
+              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Dodaj kategoriju</router-link>
+            </li>
+            <li v-if="canLogout" class="nav-item">
+              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Dodaj Tag</router-link>
+            </li>
 <!--            <li class="nav-item">-->
 <!--              <router-link :to="{name: 'Category'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Category'}">Category</router-link>-->
 <!--            </li>-->
@@ -46,7 +55,7 @@ export default {
   data() {
     return {
       selectedCategory: null,
-      kategorija: []
+      kategorija: [],
     }
   },
   mounted() {
@@ -60,6 +69,17 @@ export default {
     logout() {
       localStorage.removeItem('jwt');
       this.$router.push({name: 'Login'});
+    },
+    find(name) {
+      // this.$axios.get(`/news/kategorija/${name}`).then((response) => {
+      //   console.log("Kategorija")
+      //   this.kategorija = response.data;
+      //   console.log(response)
+      // });
+      this.$router.push(`/news/kategorija/${name}`);
+      this.$router.go()
+      console.log(name)
+
     }
   }
 }

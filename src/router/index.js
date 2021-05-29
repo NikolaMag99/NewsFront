@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
+
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '',
+    name: 'News',
+    meta: {
+      authRequired: false,
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/News.vue')
   },
   {
     path: '/news',
@@ -44,21 +48,37 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/SingleNews.vue')
   },
   {
-    path: '/category',
-    name: 'Category',
+    path: '/news/tag/:id',
+    name: 'NewsByTag',
     meta: {
       authRequired: false,
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Category.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/NewsByTag.vue')
+  },
+  {
+    path: '/news/kategorija/:name',
+    name: 'NewsByCategory',
+    meta: {
+      authRequired: false,
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/NewsByCategory.vue')
   },
   {
     path: 'users/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
-  }
+  },
+  {
+    path: '',
+    name: 'AddNews',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AddNews.vue')
+  },
 ]
 
 const router = new VueRouter({
