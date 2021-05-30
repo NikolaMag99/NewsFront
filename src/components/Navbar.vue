@@ -26,7 +26,7 @@
               <router-link :to="{name: 'AddNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddNews'}">Dodaj vest</router-link>
             </li>
             <li  v-if="canLogout" class="nav-item">
-              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Dodaj kategoriju</router-link>
+              <router-link :to="{name: 'AddCategory'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddCategory'}">Dodaj kategoriju</router-link>
             </li>
             <li v-if="canLogout" class="nav-item">
               <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Dodaj Tag</router-link>
@@ -77,7 +77,7 @@ export default {
       //   console.log(response)
       // });
       this.$router.push(`/news/kategorija/${name}`);
-      this.$router.go()
+      // this.$router.go()
       console.log(name)
 
     }

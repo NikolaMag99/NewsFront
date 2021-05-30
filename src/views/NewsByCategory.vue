@@ -64,6 +64,7 @@ export default {
   mounted() {
     this.$axios.get(`/api/news/kategorija/${this.$route.params.name}`).then((response) => {
       this.vest = response.data;
+
     });
   },
   // mounted() {

@@ -29,16 +29,20 @@
     </p>
     <br>
     <h2>Dodaj novi komentar</h2>
-    <form @click="postComment()" >
+    <div class="form-group">
+      Datum: {{currentDateTime()}}
+    </div>
+    <br>
+    <form method="post" v-on:submit.prevent = "postComment()" >
       <div class="form-group">
-        <label for="name">Ime</label>
-        <input v-model="name" type="text" class="form-control" id="name" placeholder="Unesi ime">
-
+        <label for="ime">Ime</label>
+        <input required v-model="author" type="text" class="form-control" id="ime" placeholder="Unesi ime">
       </div>
       <br>
+
       <div class="form-group">
-        <label for="content">Komentar</label>
-        <input v-model="content" type="password" class="form-control" id="content" placeholder="Komentar">
+        <label for="tekst">Komentar</label>
+        <input required v-model="content" type="text" class="form-control" id="tekst" placeholder="Komentar">
       </div>
       <br>
       <button type="submit" class="btn btn-primary mt-2">Objavi</button>
@@ -77,7 +81,11 @@ export default {
   data() {
     return {
       tagovi: [],
-      komentari: []
+      komentari: [],
+      author: null,
+      content: null,
+      cratedAt: null,
+      vest: null
     }
   },
   mounted() {
@@ -92,6 +100,25 @@ export default {
     });
   },
   methods: {
+    postComment(){
+      this.$axios.post(`/api/comments`, {
+        "author": this.author,
+        "content": this.content,
+        "vest": this.news
+
+
+      }).then(() => {
+        window.location.reload();
+      });
+    },
+    currentDateTime() {
+      const current = new Date();
+      const date = current.getFullYear()+'-'+(current.getMonth()+1)+'-'+current.getDate();
+      const time = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+      const dateTime = date +' '+ time;
+
+      return dateTime;
+    },
     toTag(id) {
       this.$router.push(`/news/tag/${id}`);
       console.log(id)

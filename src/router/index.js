@@ -6,14 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
 
-  {
-    path: '',
-    name: 'News',
-    meta: {
-      authRequired: false,
-    },
-    component: () => import(/* webpackChunkName: "about" */ '../views/News.vue')
-  },
+
   {
     path: '/news',
     name: 'News',
@@ -75,9 +68,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
-    path: '',
+    path: '/news',
     name: 'AddNews',
     component: () => import(/* webpackChunkName: "about" */ '../views/AddNews.vue')
+  },
+  {
+    path: '/category',
+    name: 'AddCategory',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AddCategory.vue')
   },
 ]
 
