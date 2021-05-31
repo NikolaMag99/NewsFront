@@ -22,14 +22,27 @@
           <thead>
           <tr>
             <th scope="col">Name</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
           </thead>
           <tbody >
-          <tr v-for=" category in kategorija" :key="category.name" @click="find(category.name)">
+          <tr v-for="category in kategorija" :key="category.name" >
             <b-card style="margin-top: 10px">
               <td scope="row"> {{ category.name }}</td>
             </b-card>
+            <td scope="row"> {{ category.description }}</td>
+            <td scope="row">
+              <b-button v-if="kategorija.length > 1" @click="deleteCategory(category.name)" size="sm">Delete</b-button>
+            </td>
+            <td scope="row">
+              <b-button @click="editCategory(category.name)" size="sm">Edit</b-button>
+            </td>
           </tr>
+
+
+
           </tbody>
         </table>
       </div>
@@ -60,9 +73,15 @@ export default {
     });
   },
   methods: {
-    find(name) {
-      this.$router.push(`api/category/${name}`);
+    editCategory(name) {
+      this.$router.push(`/api/category/${name}`);
+    },
+    deleteCategory(name) {
+      this.$axios.delete(`api/category/${name}`).then(() => {
+        this.kategorija.splice(name, 1);
 
+      });
+      window.location.reload()
     },
     postCategory(){
       console.log("Kliknuo post")
@@ -72,8 +91,6 @@ export default {
       }).then(() => {
         window.location.reload()
       })
-
-
     },
   }
 }

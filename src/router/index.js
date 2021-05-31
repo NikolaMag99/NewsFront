@@ -77,6 +77,16 @@ const routes = [
     name: 'AddCategory',
     component: () => import(/* webpackChunkName: "about" */ '../views/AddCategory.vue')
   },
+  {
+    path: '/tags',
+    name: 'AddTag',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AddTag.vue')
+  },
+  {
+    path: '/category/:name',
+    name: 'EditCategory',
+    component: () => import(/* webpackChunkName: "about" */ '../views/EditCategory.vue')
+  },
 ]
 
 const router = new VueRouter({

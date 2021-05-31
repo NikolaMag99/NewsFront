@@ -29,7 +29,7 @@
               <router-link :to="{name: 'AddCategory'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddCategory'}">Dodaj kategoriju</router-link>
             </li>
             <li v-if="canLogout" class="nav-item">
-              <router-link :to="{name: 'TopNews'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'TopNews'}">Dodaj Tag</router-link>
+              <router-link :to="{name: 'AddTag'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddTag'}">Dodaj Tag</router-link>
             </li>
 <!--            <li class="nav-item">-->
 <!--              <router-link :to="{name: 'Category'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Category'}">Category</router-link>-->
@@ -76,7 +76,10 @@ export default {
       //   this.kategorija = response.data;
       //   console.log(response)
       // });
-      this.$router.push(`/news/kategorija/${name}`);
+
+      this.$router.push(`/news/kategorija/${name}`).then(() => {
+        window.location.reload();
+      });
       // this.$router.go()
       console.log(name)
 
