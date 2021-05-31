@@ -31,6 +31,9 @@
             <li v-if="canLogout" class="nav-item">
               <router-link :to="{name: 'AddTag'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddTag'}">Dodaj Tag</router-link>
             </li>
+            <li v-if="canLogout" class="nav-item">
+              <router-link :to="{name: 'AddUser'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddUser'}">Dodaj korisnika</router-link>
+            </li>
 <!--            <li class="nav-item">-->
 <!--              <router-link :to="{name: 'Category'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'Category'}">Category</router-link>-->
 <!--            </li>-->

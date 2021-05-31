@@ -28,7 +28,7 @@
 <!--          <b-dropdown-item href="#" v-model = "author" v-for="korisnik in users" :key="korisnik.email"  @click="find(korisnik.email)">{{korisnik.email}}</b-dropdown-item>-->
 <!--        </b-dropdown>-->
         <b-form-select v-model = "selectKorisnici" class="m-3">
-          <b-form-select-option v-for="korisnik in users" :key="korisnik.email" :value= "korisnik" >{{korisnik.email}}</b-form-select-option>
+          <b-form-select-option v-for="korisnik in users" :key="korisnik.email" :value= "korisnik" >{{korisnik.first_name}}</b-form-select-option>
         </b-form-select>
         </div>
 
