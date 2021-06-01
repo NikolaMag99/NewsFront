@@ -88,6 +88,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AddUser.vue')
   },
   {
+    path: '/users/:email',
+    name: 'SingleUser',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SingleUser.vue')
+  },
+  {
     path: '/category/:name',
     name: 'EditCategory',
     component: () => import(/* webpackChunkName: "about" */ '../views/EditCategory.vue')

@@ -43,10 +43,11 @@
           <thead>
           <tr>
             <th scope="col">Email</th>
-            <th scope="col">Ime</th>
-            <th scope="col">Tip</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
             <th scope="col">Status</th>
             <th scope="col">Edit</th>
+            <th scope="col">Change Status</th>
           </tr>
           </thead>
           <tbody >
@@ -58,7 +59,10 @@
             <td scope="row"> {{ korisnici.type }}</td>
             <td scope="row"> {{ korisnici.status }}</td>
             <td scope="row">
-              <b-button @click="editUser(korisnici.name)" size="sm">Edit</b-button>
+              <b-button @click="editUser(korisnici.email)" size="sm">Edit</b-button>
+            </td>
+            <td scope="row">
+              <b-button @click="changeStatus(korisnici.email)" size="sm">Change</b-button>
             </td>
           </tr>
 
@@ -67,6 +71,7 @@
       </div>
 
     </div>
+
   </div>
 </template>
 
@@ -89,12 +94,12 @@ export default {
   mounted() {
     this.$axios.get('/api/users').then((response) => {
       this.users = response.data;
-      console.log(response)
     });
   },
   methods: {
     editUser(email) {
-      this.$router.push(`/api/users/${email}`);
+      this.$router.push(`/users/${email}`);
+      console.log(email)
     },
     postUser(){
       console.log("Kliknuo post")
@@ -107,6 +112,12 @@ export default {
         "type": this.type,
 
       }).then(() => {
+        window.location.reload()
+      })
+    },
+    changeStatus(email){
+      console.log("Kliknuo post")
+      this.$axios.get(`/api/users/status/${email}`).then(() => {
         window.location.reload()
       })
     },

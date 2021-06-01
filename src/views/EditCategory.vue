@@ -1,39 +1,16 @@
 <template>
   <div class="pt-5">
-    <h1 class="mt-4">Edit Category</h1>
-
-    <table class=" table text-center" style="width: 650px;margin-left: -150px;">
-
-      <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Desc</th>
-      </tr>
-      </thead>
-
-      <tbody >
-
-      <tr v-for="category in kategorija" :key="category.name" >
-
-        <b-card style="margin-top: 10px">
-          <td scope="row"> {{ category.name }}</td>
-        </b-card>
-        <td scope="row"> {{ category.description }}</td>
-
-      </tr>
-
-      </tbody>
-
-    </table>
+    <h2 class="mt-4">Edit Category</h2>
+    <br>
 
         <form method="post" v-on:submit.prevent = "editCategory()" >
           <div class="form-group">
             <label for="ime">Ime</label>
-            <input style="margin-top: 10px;" required  v-model="name" type="text" class="form-control" id="ime" placeholder="Enter name">
+            <input style="margin-top: 10px;" required  v-model="kategorija.name" v-text="kategorija.email" type="text" class="form-control" id="ime" placeholder="Enter name">
           </div>
           <div class="form-group">
             <label for="opis" style="margin-top: 10px;">Opis</label>
-            <input style="margin-top: 10px;" required  v-model="description" type="text" class="form-control" id="opis" placeholder="Enter desc">
+            <input style="margin-top: 10px;" required  v-model="kategorija.description" v-text="kategorija.description" type="text" class="form-control" id="opis" placeholder="Enter desc">
 
           </div>
           <br>
@@ -46,26 +23,38 @@
 
 export default {
   name: "EditCategory",
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
-      kategorija: [],
+      kategorija: null,
       name: null,
       description: null,
     }
   },
-  mounted() {
+  created() {
+    console.log("Kate edit")
     this.$axios.get(`/api/category/${this.$route.params.name}`).then((response) => {
-      console.log("CAOOO")
       this.kategorija = response.data;
     });
   },
+  // mounted() {
+  //   console.log("Kate edit")
+  //   this.$axios.get(`/api/category/${this.$route.params.name}`).then((response) => {
+  //     this.kategorija = response.data;
+  //   });
+  // },
   methods: {
     editCategory() {
       this.$axios.post(`/api/category/${this.$route.params.name}`, {
-        "name": this.name,
-        "description": this.description
-      }).then((response) => {
-        this.kategorija = response.data;
+        "name": this.kategorija.name,
+        "description": this.kategorija.description
+      }).then(() => {
+        this.$router.push(`/category`);
       });
     },
   }

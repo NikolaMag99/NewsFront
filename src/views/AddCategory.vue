@@ -23,8 +23,8 @@
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Desc</th>
-            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
           </tr>
           </thead>
           <tbody >
@@ -37,7 +37,7 @@
               <b-button v-if="kategorija.length > 1" @click="deleteCategory(category.name)" size="sm">Delete</b-button>
             </td>
             <td scope="row">
-              <b-button @click="editCategory(category.name)" size="sm">Edit</b-button>
+              <b-button @click="editCategory(category.name)">Edit</b-button>
             </td>
           </tr>
 
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     editCategory(name) {
-      this.$router.push(`/api/category/${name}`);
+      this.$router.push(`/category/${name}`)
     },
     deleteCategory(name) {
       this.$axios.delete(`api/category/${name}`).then(() => {
