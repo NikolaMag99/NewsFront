@@ -98,7 +98,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/EditCategory.vue')
   },
   {
-    path: '/news/update',
+    path: '/news/update/:id',
     name: 'EditNews',
     component: () => import(/* webpackChunkName: "about" */ '../views/EditNews.vue')
   },

@@ -67,7 +67,7 @@
           <b-button v-if="vest.length > 1" @click="deleteNews(news.id)" size="sm">Delete</b-button>
         </td>
         <td scope="row">
-          <b-button @click="editNews()" size="sm">Edit</b-button>
+          <b-button @click="editNews(news.id)" size="sm">Edit</b-button>
         </td>
 
       </tr>
@@ -133,8 +133,8 @@ export default {
       this.$router.push(`/news/${id}`);
 
     },
-    editNews() {
-      this.$router.push(`/news/update`)
+    editNews(id) {
+      this.$router.push(`/news/update/${id}`)
       console.log("UPDATE")
     },
     postNews(){

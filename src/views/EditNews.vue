@@ -16,21 +16,15 @@
           <br>
           <div class = "row"  style="text-align: center">
             <div class="col form-group">
-              <b-form-select v-model = "selectKategorija" v-text="selectKategorija" class="m-3">
+              <b-form-select v-model = "selectKategorija"  class="m-3">
                 <b-form-select-option  v-for="category in kategorija" :key="category.name" :value= "category" >{{category.name}}</b-form-select-option>
               </b-form-select>
-              <!--        <b-dropdown text="Kategorije"  variant="primary" class="e-auto mb-2 mb-lg-0" style="height: 35px; margin-top: 5px">-->
-              <!--          <b-dropdown-item href="#"  v-model = "kategorija"  v-for="category in kategorija" :key="category.name"  @click="find(category.name)">{{category.name}}</b-dropdown-item>-->
-              <!--        </b-dropdown>-->
             </div>
             <div class="col" >
               <router-link :to="{name: 'AddCategory'}" tag="a" class="nav-link" :class="{active: this.$router.currentRoute.name === 'AddCategory'}">Dodaj kategoriju</router-link>
             </div>
             <div class="col form-group">
-              <!--        <b-dropdown text="Korisnici"   variant="primary" class="e-auto mb-2 mb-lg-0" style="height: 35px; margin-top: 5px">-->
-              <!--          <b-dropdown-item href="#" v-model = "author" v-for="korisnik in users" :key="korisnik.email"  @click="find(korisnik.email)">{{korisnik.email}}</b-dropdown-item>-->
-              <!--        </b-dropdown>-->
-              <b-form-select v-model = "selectKorisnici" v-text="selectKorisnici"  class="m-3">
+              <b-form-select v-model = "selectKorisnici"   class="m-3">
                 <b-form-select-option v-for="korisnik in users" :key="korisnik.email" :value= "korisnik" >{{korisnik.first_name}}</b-form-select-option>
               </b-form-select>
             </div>
@@ -60,19 +54,30 @@ export default {
       title: null,
       content: null,
       kategorija: [],
+      users: [],
       selectKategorija: [],
       selectKorisnici: [],
     }
   },
   mounted() {
-    this.$axios.get(`/api/news/update`).then((response) => {
+    this.$axios.get(`/api/news/${this.$route.params.id}`).then((response) => {
       this.vest = response.data;
+    });
+    this.$axios.get('/api/category').then((response) => {
+      console.log("Neka glupost kategorija")
+      this.kategorija = response.data;
+      console.log(response)
+    });
+    this.$axios.get('/api/users').then((response) => {
+      this.users = response.data;
+      console.log(response)
     });
   },
   methods: {
     editNews() {
       var x = 0;
       this.$axios.post(`/api/news/update`, {
+        "id": this.$route.params.id,
         "title": this.vest.title,
         "content": this.vest.content,
         "visits": x,
