@@ -61,8 +61,8 @@
             <td scope="row">
               <b-button @click="editUser(korisnici.email)" size="sm">Edit</b-button>
             </td>
-            <td scope="row">
-              <b-button @click="changeStatus(korisnici.email)" size="sm">Change</b-button>
+            <td scope="row" v-if="korisnici.type < 1">
+              <b-button  @click="changeStatus(korisnici.email)" size="sm">Change</b-button>
             </td>
           </tr>
 

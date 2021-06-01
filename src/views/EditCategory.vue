@@ -42,12 +42,6 @@ export default {
       this.kategorija = response.data;
     });
   },
-  // mounted() {
-  //   console.log("Kate edit")
-  //   this.$axios.get(`/api/category/${this.$route.params.name}`).then((response) => {
-  //     this.kategorija = response.data;
-  //   });
-  // },
   methods: {
     editCategory() {
       this.$axios.post(`/api/category/${this.$route.params.name}`, {

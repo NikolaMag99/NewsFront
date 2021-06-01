@@ -28,9 +28,9 @@
           </tr>
           </thead>
           <tbody >
-          <tr v-for="category in kategorija" :key="category.name" >
+          <tr v-for="category in kategorija" :key="category.name">
             <b-card style="margin-top: 10px">
-              <td scope="row"> {{ category.name }}</td>
+              <td scope="row" @click="findCategory(category.name)"> {{ category.name }}</td>
             </b-card>
             <td scope="row"> {{ category.description }}</td>
             <td scope="row">
@@ -92,6 +92,9 @@ export default {
         window.location.reload()
       })
     },
+    findCategory(name) {
+      this.$router.push(`/news/kategorija/${name}`);
+    }
   }
 }
 </script>

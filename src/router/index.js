@@ -97,6 +97,11 @@ const routes = [
     name: 'EditCategory',
     component: () => import(/* webpackChunkName: "about" */ '../views/EditCategory.vue')
   },
+  {
+    path: '/news/update',
+    name: 'EditNews',
+    component: () => import(/* webpackChunkName: "about" */ '../views/EditNews.vue')
+  },
 ]
 
 const router = new VueRouter({

@@ -48,17 +48,17 @@
         <th scope="col">Title</th>
         <th scope="col">Created At</th>
         <th scope="col">Content</th>
-        <th scope="col">Edit</th>
         <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
       </tr>
       </thead>
 
       <tbody >
 
-      <tr v-for="news in vest" :key="news.id" @click="find(news.id)">
+      <tr v-for="news in vest" :key="news.id" >
 
         <b-card style="margin-top: 10px">
-          <td scope="row"> {{ news.title }}</td>
+          <td scope="row" @click="find(news.id)"> {{ news.title }}</td>
         </b-card>
 
         <td>{{new Date(news.createdAt).toISOString().split('T')[0] }}</td>
@@ -67,7 +67,7 @@
           <b-button v-if="vest.length > 1" @click="deleteNews(news.id)" size="sm">Delete</b-button>
         </td>
         <td scope="row">
-          <b-button @click="editNews(news.id)" size="sm">Edit</b-button>
+          <b-button @click="editNews()" size="sm">Edit</b-button>
         </td>
 
       </tr>
@@ -129,11 +129,17 @@ export default {
       });
       window.location.reload()
     },
+    find(id) {
+      this.$router.push(`/news/${id}`);
+
+    },
+    editNews() {
+      this.$router.push(`/news/update`)
+      console.log("UPDATE")
+    },
     postNews(){
       var x = 0;
       console.log("DODAJ ME")
-      console.log(this.selectKorisnici)
-      console.log(this.category)
       this.$axios.post(`/api/news`, {
         "title": this.title,
         "content": this.content,
