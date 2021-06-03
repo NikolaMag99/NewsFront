@@ -17,7 +17,8 @@
 
           <tbody >
 
-          <tr v-for="news in vest" :key="news.id" @click="find(news.id)">
+          <tr v-for="news in vest" :key="news.id" @click="
+          find(news.id)">
 
             <b-card style="margin-top: 10px">
             <td scope="row"> {{ news.title }}</td>
@@ -25,25 +26,26 @@
 
             <td>{{new Date(news.createdAt).toISOString().split('T')[0] }}</td>
             <td>{{ news.content | shortText }}</td>
-
+<br>
+            <br>
           </tr>
 
           </tbody>
 
         </table>
       </div>
-      <div class="col-6" >
-        <NewsCom v-if="selectedNews" :news="selectedNews"></NewsCom>
-      </div>
+<!--      <div class="col-6" >-->
+<!--        <NewsCom v-if="selectedNews" :news="selectedNews"></NewsCom>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import NewsCom from "../components/NewsCom";
+// import NewsCom from "../components/NewsCom";
 
 export default {
-  components: {NewsCom},
+  // components: {NewsCom},
   filters: {
     shortText(value) {
       if (value.length < 30) {

@@ -16,10 +16,14 @@
           <tbody>
           <tr v-for="news in vest" :key="news.id" @click="find(news.id)">
 
+            <b-card style="margin-top: 10px">
             <td scope="row">{{ news.title }}</td>
+            </b-card>
             <td>{{ news.visits }}</td>
             <td>{{ new Date(news.createdAt).toISOString().split('T')[0]  }}</td>
+            <b-card style="margin-top: 10px">
             <td>{{ news.content | shortText }}</td>
+            </b-card>
 
           </tr>
           </tbody>
