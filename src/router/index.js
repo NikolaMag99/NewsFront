@@ -70,36 +70,58 @@ const routes = [
   {
     path: '/news',
     name: 'AddNews',
+    meta: {
+      authRequired: true,
+    },
+
     component: () => import(/* webpackChunkName: "about" */ '../views/AddNews.vue')
   },
   {
     path: '/category',
     name: 'AddCategory',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/AddCategory.vue')
   },
   {
     path: '/tags',
     name: 'AddTag',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/AddTag.vue')
   },
   {
     path: '/users',
     name: 'AddUser',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/AddUser.vue')
   },
   {
     path: '/users/:email',
     name: 'SingleUser',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/SingleUser.vue')
   },
   {
     path: '/category/:name',
     name: 'EditCategory',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/EditCategory.vue')
   },
   {
     path: '/news/update/:id',
     name: 'EditNews',
+    meta: {
+      authRequired: true,
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/EditNews.vue')
   },
 ]

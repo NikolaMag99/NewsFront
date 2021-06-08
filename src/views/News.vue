@@ -26,8 +26,7 @@
 
             <td>{{new Date(news.createdAt).toISOString().split('T')[0] }}</td>
             <td>{{ news.content | shortText }}</td>
-<br>
-            <br>
+
           </tr>
 
           </tbody>
